@@ -1,0 +1,58 @@
+﻿Columna,Tipo de dato,Datos registrados,Valores diferentes
+Fecha,datetime64[us],8166,1015
+Mes,str,8166,12
+Año,int64,8166,4
+Maquina,str,8166,4
+Operario,str,4462,34
+Referencia,str,4311,52
+"Unidad por
+display",str,676,10
+Pacas producidas,float64,5135,345
+Horas trabajadas,float64,5137,24
+Turno,str,4274,7
+Horas no trabajadas,float64,4150,35
+Tipo de paro,str,4414,19
+Observaciones de paro,str,4410,35
+Codigo de paro 1,float64,464,58
+Sub Codigo de paro 1,str,463,45
+Codigo 1 en horas,float64,8166,59
+Codigo de paro 2,float64,91,21
+Codigo 2 en horas,float64,8166,22
+Codigo de paro 3,float64,151,38
+Subcodigo 3,str,59,2
+Codigo 3 en horas,float64,8166,39
+Codigo de paro 4,float64,8,8
+Codigo 4 en horas,float64,8166,9
+Codigo de paro 5,float64,3076,159
+Subcodigo 5,str,8072,20
+Codigo 5 en horas,float64,8166,160
+Área involucrada en subcodigo 5,str,7898,2
+Personal involucrado,str,1761,38
+Codigo de paro 6,float64,1896,183
+Codigo 6 en horas,float64,8166,184
+Codigo de paro 7,float64,847,104
+Codigo 7 en horas,float64,8166,105
+Codigo de paro 8,float64,104,23
+Codigo 8 en horas,float64,8166,24
+Codigo de paro 9,float64,274,56
+Codigo 9 en horas,float64,8166,57
+Codigo de paro 10,float64,536,69
+Codigo 10 en horas,float64,8166,70
+Codigo de paro 11,float64,26,9
+Codigo 11 en horas,float64,8166,10
+Codigo de paro 12,float64,788,69
+Codigo 12 en horas,float64,8166,70
+Codigo de paro 13,float64,17,12
+Codigo 13 en horas,float64,8166,12
+Codigo de paro 14,float64,176,65
+Codigo 14 en horas,float64,8166,66
+Codigo de paro 15,float64,704,43
+Codigo 15 en horas,float64,8166,44
+Codigo de paro 16,float64,2998,42
+Codigo 16 en horas,float64,8166,42
+Codigo de paro 17,float64,4373,31
+Codigo 17 en horas,float64,8166,31
+Codigo de paro 18,float64,8,6
+Codigo 18 en horas,float64,8166,7
+Tiempo de Paro,float64,8166,598
+Observaciones,str,275,270
