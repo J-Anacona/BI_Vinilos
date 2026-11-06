@@ -1,0 +1,140 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.12.0/schema.json",
+  "name": "06bbf132095b086bb300",
+  "position": {
+    "x": 404,
+    "y": 0,
+    "z": 1000,
+    "height": 388,
+    "width": 1088,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_codigo_paro"
+                        }
+                      },
+                      "Hierarchy": "area_impacto Jerarquía"
+                    }
+                  },
+                  "Level": "area_impacto"
+                }
+              },
+              "queryRef": "dim_codigo_paro.area_impacto Jerarquía.area_impacto",
+              "nativeQueryRef": "area_impacto Jerarquía area_impacto",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_codigo_paro"
+                        }
+                      },
+                      "Hierarchy": "area_impacto Jerarquía"
+                    }
+                  },
+                  "Level": "codigo_nombre"
+                }
+              },
+              "queryRef": "dim_codigo_paro.area_impacto Jerarquía.codigo_nombre",
+              "nativeQueryRef": "area_impacto Jerarquía codigo_nombre",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_codigo_paro"
+                        }
+                      },
+                      "Hierarchy": "area_impacto Jerarquía"
+                    }
+                  },
+                  "Level": "subsistema"
+                }
+              },
+              "queryRef": "dim_codigo_paro.area_impacto Jerarquía.subsistema",
+              "nativeQueryRef": "area_impacto Jerarquía subsistema",
+              "active": false
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "dim_codigo_paro"
+                        }
+                      },
+                      "Hierarchy": "area_impacto Jerarquía"
+                    }
+                  },
+                  "Level": "subcodigo"
+                }
+              },
+              "queryRef": "dim_codigo_paro.area_impacto Jerarquía.subcodigo",
+              "nativeQueryRef": "area_impacto Jerarquía subcodigo",
+              "active": false
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medida"
+                    }
+                  },
+                  "Property": "Horas Paro Causa"
+                }
+              },
+              "queryRef": "Medida.Horas Paro Causa",
+              "nativeQueryRef": "Horas Paro Causa"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Medida"
+                  }
+                },
+                "Property": "Horas Paro Causa"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

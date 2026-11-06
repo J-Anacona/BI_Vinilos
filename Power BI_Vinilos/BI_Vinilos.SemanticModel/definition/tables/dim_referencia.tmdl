@@ -1,0 +1,33 @@
+table dim_referencia
+	lineageTag: 09c66ea0-2b1f-4876-84fe-b6dc880d4d83
+
+	column referencia_key
+		dataType: int64
+		formatString: 0
+		lineageTag: d5f52ab2-d835-4fd5-b0d8-7c1cf8296070
+		summarizeBy: none
+		sourceColumn: referencia_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column referencia_nombre
+		dataType: string
+		lineageTag: 1a7f8ed7-0c75-4ab4-b3d1-b7d722553ac3
+		summarizeBy: none
+		sourceColumn: referencia_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_referencia = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_referencia = Origen{[Schema="public",Item="dim_referencia"]}[Data]
+				in
+				    public_dim_referencia
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

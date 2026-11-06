@@ -1,0 +1,33 @@
+table dim_maquina
+	lineageTag: 0305120e-2efb-4133-9e33-0444258f6f9a
+
+	column maquina_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 21878e88-41c5-45bf-905f-a66db041d48c
+		summarizeBy: none
+		sourceColumn: maquina_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column maquina_nombre
+		dataType: string
+		lineageTag: 8e195aaf-8104-4952-a126-177d40cdbebd
+		summarizeBy: none
+		sourceColumn: maquina_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_maquina = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_maquina = Origen{[Schema="public",Item="dim_maquina"]}[Data]
+				in
+				    public_dim_maquina
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

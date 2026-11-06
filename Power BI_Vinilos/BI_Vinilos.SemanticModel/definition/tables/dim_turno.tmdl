@@ -1,0 +1,73 @@
+table dim_turno
+	lineageTag: 5650bdd5-ef75-48af-9e77-259915c859e3
+
+	column turno_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 106da783-f199-4200-ac36-6ecf8f4437f7
+		summarizeBy: none
+		sourceColumn: turno_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column turno_nombre
+		dataType: string
+		lineageTag: 05c2cc91-905c-4e88-bb21-8bff3f54c658
+		summarizeBy: none
+		sourceColumn: turno_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora_inicio
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 92acb35e-3b4c-4933-9d65-e1891320c425
+		summarizeBy: none
+		sourceColumn: hora_inicio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column hora_fin
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 2ad5eb5a-4e4c-4405-8b96-2ad3b90350e9
+		summarizeBy: none
+		sourceColumn: hora_fin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column duracion_horas
+		dataType: double
+		lineageTag: 487e83ac-1f0c-464d-9654-f07907db7b9b
+		summarizeBy: none
+		sourceColumn: duracion_horas
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column turno_tipo
+		dataType: string
+		lineageTag: 88094ba5-cc45-4577-81ec-5f1f1d4283e7
+		summarizeBy: none
+		sourceColumn: turno_tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_turno = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_turno = Origen{[Schema="public",Item="dim_turno"]}[Data]
+				in
+				    public_dim_turno
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

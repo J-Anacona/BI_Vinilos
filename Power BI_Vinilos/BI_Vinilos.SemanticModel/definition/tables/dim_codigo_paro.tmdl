@@ -1,0 +1,85 @@
+table dim_codigo_paro
+	lineageTag: c474f17e-3353-4046-85cd-5aa9573251fb
+
+	column codigo_paro_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 14928cd5-00ee-4264-8d1e-c9597686928a
+		summarizeBy: none
+		sourceColumn: codigo_paro_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_impacto
+		dataType: string
+		lineageTag: 77305c25-f510-4b65-8bbf-d8bdaa744df8
+		summarizeBy: none
+		sourceColumn: area_impacto
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 0347a4d5-2c01-480b-8c32-d036e6c80a62
+		summarizeBy: none
+		sourceColumn: codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_nombre
+		dataType: string
+		lineageTag: 3ff8f72f-8f56-40f1-8988-d31d409cb8e8
+		summarizeBy: none
+		sourceColumn: codigo_nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column subsistema
+		dataType: string
+		lineageTag: 10a21641-3724-4ac9-90e2-da61dae39d17
+		summarizeBy: none
+		sourceColumn: subsistema
+
+		annotation SummarizationSetBy = Automatic
+
+	column subcodigo
+		dataType: string
+		lineageTag: 1b4ce856-6ba2-43b4-a3d1-ab4e5048b6a5
+		summarizeBy: none
+		sourceColumn: subcodigo
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'area_impacto Jerarquía'
+		lineageTag: bd894bba-eacf-45a1-8af5-4a279c76f684
+
+		level area_impacto
+			lineageTag: fa68c4c7-5b93-4d59-a34e-bdea21e974e1
+			column: area_impacto
+
+		level codigo_nombre
+			lineageTag: 4b838020-7a69-4a24-96ff-13aff83dbe11
+			column: codigo_nombre
+
+		level subsistema
+			lineageTag: e34dce9a-8171-4b0d-a72a-082c7a2d38bb
+			column: subsistema
+
+		level subcodigo
+			lineageTag: 80069bd3-3c2e-44d6-a3e8-ed9b04d012ad
+			column: subcodigo
+
+	partition dim_codigo_paro = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_codigo_paro = Origen{[Schema="public",Item="dim_codigo_paro"]}[Data]
+				in
+				    public_dim_codigo_paro
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

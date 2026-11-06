@@ -1,0 +1,106 @@
+table fact_paro
+	lineageTag: 863c77d1-a735-4fd3-9904-f7e0e1905552
+
+	column paro_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c99430b-0396-46a1-bf64-7c8e6c44898e
+		summarizeBy: sum
+		sourceColumn: paro_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column produccion_key
+		dataType: int64
+		formatString: 0
+		lineageTag: e9fdf241-0a62-4337-a159-753d9adf75f2
+		summarizeBy: sum
+		sourceColumn: produccion_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f25bbe74-1e18-4dfe-b26e-87f5525175ae
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column maquina_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 5ffdd602-664e-409a-8489-1ef346e6812e
+		summarizeBy: none
+		sourceColumn: maquina_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column turno_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f5cbf1e-cbcb-408c-b13f-2f43af0f81d4
+		summarizeBy: none
+		sourceColumn: turno_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column referencia_key
+		dataType: int64
+		formatString: 0
+		lineageTag: c46d552b-4618-46c9-bb7a-c3832ed0c834
+		summarizeBy: none
+		sourceColumn: referencia_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column operario_key
+		dataType: int64
+		formatString: 0
+		lineageTag: c81e35ef-4605-43e1-9abf-e5c51674f8b6
+		summarizeBy: none
+		sourceColumn: operario_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_paro_key
+		dataType: int64
+		formatString: 0
+		lineageTag: aafeee6b-fc03-41a3-a3a8-115ffc6a9afe
+		summarizeBy: none
+		sourceColumn: codigo_paro_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column horas_paro
+		dataType: double
+		lineageTag: c5e56ebb-2be3-4f2a-8d07-2203cb5f265b
+		summarizeBy: sum
+		sourceColumn: horas_paro
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column area_involucrada
+		dataType: string
+		lineageTag: 7cb64b15-7a55-405c-937b-98a1cf201abf
+		summarizeBy: none
+		sourceColumn: area_involucrada
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_paro = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_fact_paro = Origen{[Schema="public",Item="fact_paro"]}[Data]
+				in
+				    public_fact_paro
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,102 @@
+table Medida
+	lineageTag: d61c93f1-1451-42c4-96bf-bf848e043fce
+
+	measure 'Horas No Trabajadas' = SUM ( fact_produccion[horas_no_trabajadas] )
+		formatString: 0.0
+		lineageTag: 05478091-9b6f-4322-a2fe-971aa2733b72
+
+	measure 'Horas Trabajadas' = SUM ( fact_produccion[horas_trabajadas] )
+		formatString: 0.0
+		lineageTag: e953f8c4-580e-4270-808a-a240f2b68976
+
+	measure 'Pacas Producidas' = SUM ( fact_produccion[pacas_producidas] )
+		lineageTag: 04c3ec10-fd87-49eb-a030-c58f3415c3e8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Horas Paro' = SUM ( fact_produccion[tiempo_paro_horas] )
+		formatString: 0.0
+		lineageTag: be52de78-c1cb-4aeb-8d0b-ee75b91a329b
+
+	measure '% Productividad' = DIVIDE ( [Horas Trabajadas] - [Horas Paro], [Horas Trabajadas] )
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 4c0bcc9d-2d77-43f5-9c81-4fcdc00336f4
+
+	measure '% Paro' = DIVIDE ( [Horas Paro], [Horas Trabajadas] )
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: 746bcd7d-1d59-4a30-832e-455a41447679
+
+	measure 'Horas Paro Causa' = SUM ( fact_paro[horas_paro] )
+		formatString: 0.0
+		lineageTag: f95bdf2b-4579-401f-86b7-c0bad0d61269
+
+	measure '% Productividad Año Anterior' =
+			
+			CALCULATE ( [% Productividad], SAMEPERIODLASTYEAR ( dim_fecha[fecha] ) )
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: f7ca26f6-7958-405e-b21b-5e3e4cedce5f
+
+	measure 'Variación vs Año Anterior (pp)' =
+			
+			IF (
+			    ISBLANK ( [% Productividad Año Anterior] ),
+			    BLANK (),
+			    ( [% Productividad] - [% Productividad Año Anterior] ) * 100
+			)
+		formatString: 0.0
+		lineageTag: 461dc511-3994-491f-9737-a7887d4a27a0
+
+	measure 'Horas Paro Acumuladas Año' = TOTALYTD ( [Horas Paro], dim_fecha[fecha] )
+		formatString: 0.0
+		lineageTag: c6ad4c01-14a1-4a9f-89f8-731eeb98130d
+
+	measure '% Horas Paro Causa' =
+			
+			DIVIDE (
+			    [Horas Paro Causa],
+			    CALCULATE ( [Horas Paro Causa], ALLSELECTED ( dim_codigo_paro ) )
+			)
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: f83c21ac-ddbc-4778-8254-3d2a96321def
+
+	measure '% Acumulado Pareto' =
+			
+			VAR _horas = [Horas Paro Causa]
+			VAR _causas = ALLSELECTED ( dim_codigo_paro[codigo_nombre] )
+			VAR _acumulado =
+			    SUMX (
+			        FILTER ( _causas, CALCULATE ( [Horas Paro Causa] ) >= _horas ),
+			        CALCULATE ( [Horas Paro Causa] )
+			    )
+			VAR _total = CALCULATE ( [Horas Paro Causa], ALLSELECTED ( dim_codigo_paro ) )
+			RETURN
+			    DIVIDE ( _acumulado, _total )
+		formatString: 0.0\ %;-0.0\ %;0.0\ %
+		lineageTag: b98900f3-7352-45b1-afea-9b6b53f9260e
+
+	measure 'Pacas con Referencia' =
+			
+			CALCULATE ( [Pacas Producidas], dim_referencia[referencia_key] <> 0 )
+		lineageTag: e69ec2f9-990f-4739-a0db-2de9790ff642
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Columna1
+		dataType: string
+		lineageTag: f5fe292f-5fce-47ae-b005-6d7353e549f0
+		summarizeBy: none
+		sourceColumn: Columna1
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medida = m
+		mode: import
+		source =
+				let
+				    Origen = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Columna1 = _t]),
+				    #"Tipo cambiado" = Table.TransformColumnTypes(Origen,{{"Columna1", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+

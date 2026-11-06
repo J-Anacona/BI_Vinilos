@@ -1,0 +1,30 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-CO
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dim_codigo_paro","dim_fecha","dim_maquina","dim_motivo_no_trabajo","dim_operario","dim_referencia","dim_turno","fact_paro","fact_produccion","Medidas","Medida"]
+
+annotation PBI_RemovedChildren = [{"remoteItemId":{"foreignKeyRelationship":{"fromTableLocalLineageTag":"863c77d1-a735-4fd3-9904-f7e0e1905552","fromColumnLocalLineageTag":"e9fdf241-0a62-4337-a159-753d9adf75f2","toTableLocalLineageTag":"16e38489-87d6-48ea-a0d4-d2b62b4cbfcf","toColumnLocalLineageTag":"93937f02-3a1f-4788-98c0-584906b75acf"}},"objectType":"Relationship"}]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table dim_codigo_paro
+ref table dim_fecha
+ref table dim_maquina
+ref table dim_motivo_no_trabajo
+ref table dim_operario
+ref table dim_referencia
+ref table dim_turno
+ref table fact_paro
+ref table fact_produccion
+ref table Medida
+
+ref cultureInfo es-ES
+

@@ -1,0 +1,59 @@
+table dim_motivo_no_trabajo
+	lineageTag: 6c47482a-9846-4d4f-9de0-83b36a31e6d6
+
+	column motivo_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 7cef6416-905a-4a96-95f2-e70725b16b55
+		summarizeBy: none
+		sourceColumn: motivo_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column catalogo
+		dataType: string
+		lineageTag: 606d0c4e-7cee-4868-993f-aad25e760ccf
+		summarizeBy: none
+		sourceColumn: catalogo
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo
+		dataType: int64
+		formatString: 0
+		lineageTag: 564f7458-e890-449a-8357-6567b10847af
+		summarizeBy: none
+		sourceColumn: codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	column nombre
+		dataType: string
+		lineageTag: 494a08df-a146-4e78-8c28-7c3ee1eea162
+		summarizeBy: none
+		sourceColumn: nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_equivalente
+		dataType: int64
+		formatString: 0
+		lineageTag: bfef3009-2fbb-452e-af3f-a73b6aab2e00
+		summarizeBy: none
+		sourceColumn: codigo_equivalente
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_motivo_no_trabajo = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_motivo_no_trabajo = Origen{[Schema="public",Item="dim_motivo_no_trabajo"]}[Data]
+				in
+				    public_dim_motivo_no_trabajo
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

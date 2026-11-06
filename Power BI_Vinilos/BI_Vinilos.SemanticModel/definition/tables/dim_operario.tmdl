@@ -1,0 +1,33 @@
+table dim_operario
+	lineageTag: 7386f73e-c26a-4939-bb21-a5c383c9542a
+
+	column operario_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3f188aaa-88ae-4869-bafa-498332abfab5
+		summarizeBy: none
+		sourceColumn: operario_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column operario_codigo
+		dataType: string
+		lineageTag: 1152f85d-36fd-4eda-8a00-54490f281e49
+		summarizeBy: none
+		sourceColumn: operario_codigo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_operario = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_operario = Origen{[Schema="public",Item="dim_operario"]}[Data]
+				in
+				    public_dim_operario
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+

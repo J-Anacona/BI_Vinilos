@@ -1,0 +1,72 @@
+relationship 3992a0b3-e61e-409d-a6a6-7ea1ddcb02d1
+	fromColumn: fact_paro.codigo_paro_key
+	toColumn: dim_codigo_paro.codigo_paro_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 6701b151-0656-4e83-8ac2-cfa783745c8b
+	fromColumn: fact_paro.fecha_key
+	toColumn: dim_fecha.fecha_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 06ac676b-10ce-4cce-a252-beab78b3f562
+	fromColumn: fact_paro.maquina_key
+	toColumn: dim_maquina.maquina_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bedc4d67-2462-4e45-bfc4-c1b5f8fa2e3c
+	fromColumn: fact_paro.operario_key
+	toColumn: dim_operario.operario_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship bd2d0dab-0c63-48dc-af4b-19d0d65703ad
+	fromColumn: fact_paro.referencia_key
+	toColumn: dim_referencia.referencia_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 28c25670-a8ae-4f3a-96b4-013a586f295a
+	fromColumn: fact_paro.turno_key
+	toColumn: dim_turno.turno_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 2e61cc63-8be8-4981-98ab-8e73b5726d74
+	fromColumn: fact_produccion.fecha_key
+	toColumn: dim_fecha.fecha_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship fcdd81d4-be67-4b2c-9011-c03896a99bf3
+	fromColumn: fact_produccion.maquina_key
+	toColumn: dim_maquina.maquina_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship e3c97b16-5a4f-465f-8b9c-c6e0dcf7ade3
+	fromColumn: fact_produccion.motivo_key
+	toColumn: dim_motivo_no_trabajo.motivo_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 5247f68d-ff7f-4ea9-aa5e-3ef5e452c9bb
+	fromColumn: fact_produccion.operario_key
+	toColumn: dim_operario.operario_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 74b2bd53-3771-48d7-8749-10bcdb4a3be0
+	fromColumn: fact_produccion.referencia_key
+	toColumn: dim_referencia.referencia_key
+
+	annotation PBI_IsFromSource = FS
+
+relationship 68e02c64-b01d-4282-b477-50a5174dafac
+	fromColumn: fact_produccion.turno_key
+	toColumn: dim_turno.turno_key
+
+	annotation PBI_IsFromSource = FS
+

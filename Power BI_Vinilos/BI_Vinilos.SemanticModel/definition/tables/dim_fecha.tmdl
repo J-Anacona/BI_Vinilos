@@ -1,0 +1,143 @@
+table dim_fecha
+	lineageTag: b0b00bbf-3084-41db-82ed-7bc558e2498d
+	dataCategory: Time
+
+	column fecha_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 5731b77b-dfec-4137-8d6a-c754218221ae
+		summarizeBy: none
+		sourceColumn: fecha_key
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column fecha
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: a01c5ea0-7e40-4e3a-8e4f-a4ddb13894e8
+		summarizeBy: none
+		sourceColumn: fecha
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column anio
+		dataType: int64
+		formatString: 0
+		lineageTag: e33a878f-ed50-4b1e-9851-c428f7fe83ad
+		summarizeBy: none
+		sourceColumn: anio
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: 6d519df6-6475-4028-915e-5f2a3dd5ae78
+		summarizeBy: none
+		sourceColumn: trimestre
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column mes
+		dataType: int64
+		formatString: 0
+		lineageTag: 50406e4e-0aef-49f2-ad7d-91ac8a6fb4af
+		summarizeBy: none
+		sourceColumn: mes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column nombre_mes
+		dataType: string
+		lineageTag: d42334a8-0882-4acc-8536-b4e303a08e8d
+		summarizeBy: none
+		sourceColumn: nombre_mes
+		sortByColumn: mes
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column anio_mes
+		dataType: string
+		lineageTag: 1f74c638-d517-40dc-847d-244623eb6d76
+		summarizeBy: none
+		sourceColumn: anio_mes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column dia
+		dataType: int64
+		formatString: 0
+		lineageTag: f3b2dc7d-4110-43e1-a749-5ccaf1aaaa58
+		summarizeBy: none
+		sourceColumn: dia
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column dia_semana
+		dataType: int64
+		formatString: 0
+		lineageTag: 60f42b7c-88c9-4ad2-b334-b4e67bb92c8e
+		summarizeBy: none
+		sourceColumn: dia_semana
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column nombre_dia
+		dataType: string
+		lineageTag: 669ed56b-b69a-48a8-bf27-a2adee149202
+		summarizeBy: none
+		sourceColumn: nombre_dia
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column es_fin_semana
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: ec6de221-78cd-4fcf-aadc-843b6951ea3f
+		summarizeBy: none
+		sourceColumn: es_fin_semana
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_fecha = m
+		mode: import
+		source =
+				let
+				    Origen = PostgreSQL.Database("localhost", "BI_Vinilos"),
+				    public_dim_fecha = Origen{[Schema="public",Item="dim_fecha"]}[Data]
+				in
+				    public_dim_fecha
+
+	changedProperty = Name
+
+	changedProperty = IsHidden
+
+	annotation PBI_ResultType = Table
+
